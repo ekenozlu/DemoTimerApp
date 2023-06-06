@@ -3,7 +3,7 @@ In this demo app I created a Timer application on Swift with Storyboard.
 
 ## App Contains:
 1. Second based timer
-2. Working also in background
+2. Working also in background with UserDefaults
 3. Two button structure
 4. Table for lap counting
 
