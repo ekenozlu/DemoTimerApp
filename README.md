@@ -12,8 +12,11 @@ In this demo app I created a Timer application on Swift with Storyboard.
 2. Timer, Date, TimeInterval
 3. UIKit and Storyboard
 
-![alt text](https://github.com/ekenozlu/DemoTimerApp/blob/main/timer_screen_1.png "Screen of Timer")
 
-![alt text](https://github.com/ekenozlu/DemoTimerApp/blob/main/timer_screen_2.png "Screen of Timer")
+| Timer Screen                        | Timer Screen                        | Timer Screen                                |
+| ----------------------------------- | ----------------------------------- | ------------------------------------------- |
+| ![timerscreen](https://github.com/ekenozlu/DemoTimerApp/blob/main/timer_screen_1.png "Timer Screen") | ![timerscreen](https://github.com/ekenozlu/DemoTimerApp/blob/main/timer_screen_2.png "Timer Screen") | ![timerscreen](https://github.com/ekenozlu/DemoTimerApp/blob/main/timer_screen_3.png "Timer Screen") |
 
-![alt text](https://github.com/ekenozlu/DemoTimerApp/blob/main/timer_screen_3.png "Screen of Timer")
+
+
+
