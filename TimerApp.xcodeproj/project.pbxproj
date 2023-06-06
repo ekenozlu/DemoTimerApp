@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		638160222A2F7B430069BF5E /* lapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638160212A2F7B430069BF5E /* lapCell.swift */; };
+		638160242A2F85CE0069BF5E /* Lap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638160232A2F85CE0069BF5E /* Lap.swift */; };
 		638D94D92A2F38FA00F163E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638D94D82A2F38FA00F163E1 /* AppDelegate.swift */; };
 		638D94DB2A2F38FA00F163E1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638D94DA2A2F38FA00F163E1 /* SceneDelegate.swift */; };
 		638D94DD2A2F38FA00F163E1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638D94DC2A2F38FA00F163E1 /* ViewController.swift */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		638160212A2F7B430069BF5E /* lapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lapCell.swift; sourceTree = "<group>"; };
+		638160232A2F85CE0069BF5E /* Lap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lap.swift; sourceTree = "<group>"; };
 		638D94D52A2F38FA00F163E1 /* TimerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		638D94D82A2F38FA00F163E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		638D94DA2A2F38FA00F163E1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,8 +84,8 @@
 			isa = PBXGroup;
 			children = (
 				638D94D72A2F38FA00F163E1 /* TimerApp */,
-				638D94EE2A2F38FC00F163E1 /* TimerAppTests */,
 				638D94F82A2F38FC00F163E1 /* TimerAppUITests */,
+				638D94EE2A2F38FC00F163E1 /* TimerAppTests */,
 				638D94D62A2F38FA00F163E1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -106,6 +110,8 @@
 				638D94E12A2F38FB00F163E1 /* Assets.xcassets */,
 				638D94E32A2F38FB00F163E1 /* LaunchScreen.storyboard */,
 				638D94E62A2F38FB00F163E1 /* Info.plist */,
+				638160212A2F7B430069BF5E /* lapCell.swift */,
+				638160232A2F85CE0069BF5E /* Lap.swift */,
 			);
 			path = TimerApp;
 			sourceTree = "<group>";
@@ -259,7 +265,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				638D94DD2A2F38FA00F163E1 /* ViewController.swift in Sources */,
+				638160222A2F7B430069BF5E /* lapCell.swift in Sources */,
 				638D94D92A2F38FA00F163E1 /* AppDelegate.swift in Sources */,
+				638160242A2F85CE0069BF5E /* Lap.swift in Sources */,
 				638D94DB2A2F38FA00F163E1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

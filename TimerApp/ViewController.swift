@@ -7,31 +7,37 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var startStopButton: UIButton!
-    @IBOutlet weak var resetButton: UIButton!
+    @IBOutlet weak var resetLapButton: UIButton!
     
+    @IBOutlet weak var lapsTableView: UITableView!
     
     var timerCounting: Bool = false
     var startTime: Date?
     var stopTime: Date?
+    var lapList: [[Int]] = [[]]
     
-    let userDefaults   = UserDefaults.standard
-    let START_TIME_KEY = "startTime"
-    let STOP_TIME_KEY  = "stopTime"
-    let COUNTING_KEY   = "countingKey"
+    let userDefaults    = UserDefaults.standard
+    let START_TIME_KEY  = "startTime"
+    let STOP_TIME_KEY   = "stopTime"
+    let COUNTING_KEY    = "countingKey"
+    let LAP_LIST_KEY    = "lapList"
     
     var scheduledTimer: Timer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        resetButton.isEnabled = false
+        resetLapButton.isEnabled = false
+        resetLapButton.backgroundColor = UIColor(named: "blueButtonColor")
+        startTime       = userDefaults.object(forKey: START_TIME_KEY) as? Date
+        stopTime        = userDefaults.object(forKey: STOP_TIME_KEY) as? Date
+        timerCounting   = userDefaults.bool(forKey: COUNTING_KEY)
+        lapList         = userDefaults.array(forKey: LAP_LIST_KEY) as! [[Int]]
         
-        startTime     = userDefaults.object(forKey: START_TIME_KEY) as? Date
-        stopTime      = userDefaults.object(forKey: STOP_TIME_KEY) as? Date
-        timerCounting = userDefaults.bool(forKey: COUNTING_KEY)
+        setLapListAndReloadTable()
         
         if timerCounting{
             startTimer()
@@ -64,11 +70,40 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func resetTapped(_ sender: Any) {
-        setStopTime(date: nil)
-        setStartTime(date: nil)
-        setTimeLabel(0)
-        stopTimer()
+    @IBAction func resetLapTapped(_ sender: Any) {
+        if timerCounting {
+            //LAP
+            if let start = startTime {
+                let time = Date().timeIntervalSince(start)
+                lapList.insert([Int(time),calculateLapTimeInSeconds()], at: 0)
+                setLapListAndReloadTable()
+            }
+        }
+        else {
+            //RESET
+            setStopTime(date: nil)
+            setStartTime(date: nil)
+            setTimeLabel(0)
+            stopTimer()
+            lapList.removeAll(keepingCapacity: false)
+            setLapListAndReloadTable()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return lapList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let lapCell = tableView.dequeueReusableCell(withIdentifier: "lapCell") as! lapCell
+        
+        lapCell.lapCountLabel.text = "Lap " + String(lapList.count - indexPath.row)
+        
+        let laptime = countToTime(seconds: lapList[indexPath.row][1])
+        let lapTimeString = makeTimeString(hours: laptime.0, minutes: laptime.1, seconds: laptime.2)
+        lapCell.lapTimeLabel.text = lapTimeString
+        
+        return lapCell
     }
     
     func startTimer(){
@@ -78,7 +113,8 @@ class ViewController: UIViewController {
         startStopButton.setTitle("STOP", for: .normal)
         startStopButton.setTitleColor(UIColor.systemRed, for: .normal)
         startStopButton.backgroundColor = UIColor(named: "redButtonColor")
-        resetButton.isEnabled = true
+        resetLapButton.isEnabled = true
+        resetLapButton.setTitle("LAP", for: .normal)
     }
     
     func stopTimer(){
@@ -89,7 +125,7 @@ class ViewController: UIViewController {
         startStopButton.setTitle("START", for: .normal)
         startStopButton.setTitleColor(UIColor.systemGreen, for: .normal)
         startStopButton.backgroundColor = UIColor(named: "greenButtonColor")
-        resetButton.isEnabled = false
+        resetLapButton.setTitle("RESET", for: .normal)
     }
     
     @objc func timerCounter() -> Void {
@@ -131,6 +167,18 @@ class ViewController: UIViewController {
         return Date().addingTimeInterval(diff)
     }
     
+    func calculateLapTimeInSeconds() -> Int {
+        var lapTime = 0
+        if let start = startTime {
+            let diff = Date().timeIntervalSince(start)
+            lapTime = Int(diff)
+            if lapList.count > 0 {
+                lapTime -= lapList.first![0]
+            }
+        }
+        return lapTime
+    }
+    
     func setStartTime(date: Date?){
         startTime = date
         userDefaults.set(startTime, forKey: START_TIME_KEY)
@@ -144,6 +192,11 @@ class ViewController: UIViewController {
     func setTimerCounting(_ val: Bool){
         timerCounting = val
         userDefaults.set(timerCounting, forKey: COUNTING_KEY)
+    }
+    
+    func setLapListAndReloadTable(){
+        lapsTableView.reloadData()
+        userDefaults.set(lapList, forKey: LAP_LIST_KEY)
     }
 }
 
